@@ -1,3 +1,17 @@
+# Road segmentation/classification challenge
+Given a set of point cloud, identify the roads and draw an ideal line segment. The closer the segment is to running through the middle of the road, the better the score.
+
+TODO: more details here on scoring, where to implement and example data.
+
+Example cases you may need to solve for:
+
+![Basic road point cloud](./images/basic-road-pc.png)
+
+![turns](./images/turns.png)
+
+![elevation](./images/elevation.png)
+
+
 ## Requirements
 - Python ~3.10
 - Poetry
@@ -9,7 +23,8 @@ poetry config virtualenvs.in-project true
 ```
 
 ## Suggested reading
-- [PLY file format](https://paulbourke.net/dataformats/ply/)
+[PLY file format](https://paulbourke.net/dataformats/ply/)
+
 Note that we synthetically generated the point cloud. So each point in the point cloud file has more properties than it needs which is why you'll see some RGBa values as 0's and others are filled out. i.e. Road type points may have `road_colour` populated but not `ground_colour`. Due to the way the synthetic data was generated, the properties had to be on the same line. It is not recommended that you rely on these properties for all datasets.
 
 ## Quickstart
@@ -25,12 +40,6 @@ Jupyter lab should pop up in your browser and you can select `Main.ipynb` to sta
 `model` - Model entities. Contains a `Point` class that you can use in your logic. Check out its properties. 
 `snippets` - Little helpful code snippets if you want to run them individually to test stuff out, they're not part of the main app
 `util` - Various helper utilities. One creates a O3d point cloud and the other is for parsing the custom PLY file and its properties.
-
-## Challenge
-Given a set of point cloud, identify the roads and draw an ideal line segment. The closer the segment is to running through the middle of the road, the better the score.
-
-TODO: more details here on scoring and where to implement.
-
 
 ## Troubleshooting
 ### What the heck are the visualization controls?
