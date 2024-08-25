@@ -1,7 +1,13 @@
 # Road segmentation/classification challenge
 Given a set of point cloud, identify the roads and draw an ideal line segment. The closer the segment is to running through the middle of the road, the better the score.
 
-TODO: more details here on scoring, where to implement and example data.
+## TODOs
+
+[ ] more details here on scoring, where to implement and example data.
+[ ] maybe convert to a similarity score instead of a distance
+[ ] visually display ideal and actual segments and their scores
+[ ] automated evaluator
+
 
 Example cases you may need to solve for:
 
@@ -14,7 +20,8 @@ Example cases you may need to solve for:
 
 ## Requirements
 - Python ~3.10
-- Poetry
+- [Poetry](https://python-poetry.org/)
+- [Git LFS](https://git-lfs.com/)
 - Tested on Intel and ARM based Macs.
 
 Set poetry configs:
@@ -35,6 +42,11 @@ poetry install
 poetry run jupyter lab
 ```
 Jupyter lab should pop up in your browser and you can select `Main.ipynb` to start trying things out. The built in Jupyter notebook interpreter in VSCode also works. There's a known issue on MacOS where the window may still freeze even after you push "q" to quit. That's okay, just restart the kernel.
+
+## Running tests
+```bash
+poetry run pytest
+```
 
 ## Directory layout
 `model` - Model entities. Contains a `Point` class that you can use in your logic. Check out its properties. 
