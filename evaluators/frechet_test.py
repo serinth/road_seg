@@ -10,6 +10,23 @@ def frechet():
     return FrechetLineSegmentEvaluator()
 
 
+@pytest.fixture
+def ideal_line():
+    # hand picked, could be off a bit (basic.ply)
+    return LineSegment(
+        [
+            Point(-3, -0.15, 0.058),
+            Point(0.96, -0.17, 0.16),
+            Point(3.7, -1.3, 0.16),
+            Point(6.6, -0.45, 0.16),
+            Point(6.4, 1.9, 0.005),
+            Point(4.4, 3.3, 0.005),
+            Point(2, 4.1, 0.005),
+            Point(-2.2, 4.3, 0.16),
+        ]
+    )
+
+
 def test_parallel_segments(frechet):
     p1 = Point(0, 0, 0)
     p2 = Point(1, 1, 1)
@@ -58,4 +75,39 @@ def test_different_lengths(frechet):
     assert result == pytest.approx(1.0, rel=1e-5)
 
 
-# TODO: test actual segments
+def test_ideal_line_should_return_low_distance_on_overlapping_line(ideal_line):
+    actual_line = ideal_line
+    evaluator = FrechetLineSegmentEvaluator()
+    result = evaluator.distance_from_ideal(ideal_line, actual_line)
+    assert result == pytest.approx(10.0, rel=1e-4)
+
+
+def test_ideal_line_should_return_high_distance_on_ideal_but_short_line(ideal_line):
+    actual_line = LineSegment(
+        [
+            Point(-3, -0.15, 0.058),
+            Point(0.96, -0.17, 0.16),
+            Point(3.7, -1.3, 0.16),
+        ]
+    )
+    evaluator = FrechetLineSegmentEvaluator()
+    result = evaluator.distance_from_ideal(ideal_line, actual_line)
+    print(result)
+    assert result == pytest.approx(24.0, rel=1)
+
+
+def test_ideal_line_should_return_high_distance_on_ideal_but_long_line(ideal_line):
+    actual_line = LineSegment(
+        [
+            Point(-3, -0.15, 0.058),
+            Point(0.96, -0.17, 0.16),
+            Point(103.7, -1.3, 0.16),
+        ]
+    )
+    evaluator = FrechetLineSegmentEvaluator()
+    result = evaluator.distance_from_ideal(ideal_line, actual_line)
+    print(result)
+    assert result == pytest.approx(290.0, rel=1)
+
+
+# TODO: test more cases

@@ -1,4 +1,5 @@
 import open3d.visualization as viz
+import open3d as o3d
 
 
 def visualize_point_cloud(pc) -> None:
@@ -15,3 +16,7 @@ def visualize_point_cloud(pc) -> None:
 
     # Destroy the visualizer window
     v.destroy_window()
+
+
+pc = o3d.io.read_point_cloud("./data/basic.ply")
+visualize_point_cloud(pc)

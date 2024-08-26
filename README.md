@@ -43,6 +43,11 @@ poetry run jupyter lab
 ```
 Jupyter lab should pop up in your browser and you can select `Main.ipynb` to start trying things out. The built in Jupyter notebook interpreter in VSCode also works. There's a known issue on MacOS where the window may still freeze even after you push "q" to quit. That's okay, just restart the kernel.
 
+## Running snippets
+```bash
+poetry run python snippets/visualize_pc.py
+```
+
 ## Running tests
 ```bash
 poetry run pytest

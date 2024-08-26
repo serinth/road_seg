@@ -8,7 +8,10 @@ from math import sqrt
 class FrechetLineSegmentEvaluator(LineSegmentEvaluator):
     def distance_from_ideal(self, ideal: LineSegment, actual: LineSegment) -> float:
         # Calculate the Fréchet distance between the ideal and actual line segments
-        return self._frechet_distance(ideal, actual)
+        frechet_distance = self._frechet_distance(ideal, actual)
+        length_diff = abs(ideal.length() - actual.length())
+        # penalize differences in length
+        return frechet_distance + length_diff
 
     # p1 and p2 are segment 1 (ideal) points, q1 and q2 are segment 2 (actual) points
     def _segment_distance(self, p1: Point, p2: Point, q1: Point, q2: Point):
