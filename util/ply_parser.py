@@ -1,6 +1,4 @@
 from model.point import Point
-from typing import Optional
-
 # Going to assume there's only 2 sets of RGBa values. Modify this function if there are more.
 
 
