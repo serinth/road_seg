@@ -75,14 +75,15 @@ def test_different_lengths(frechet):
     assert result == pytest.approx(1.0, rel=1e-5)
 
 
-def test_ideal_line_should_return_low_distance_on_overlapping_line(ideal_line):
+def test_ideal_line_should_return_low_distance_on_overlapping_line(frechet, ideal_line):
     actual_line = ideal_line
-    evaluator = FrechetLineSegmentEvaluator()
-    result = evaluator.distance_from_ideal(ideal_line, actual_line)
+    result = frechet.distance_from_ideal(ideal_line, actual_line)
     assert result == pytest.approx(10.0, rel=1e-4)
 
 
-def test_ideal_line_should_return_high_distance_on_ideal_but_short_line(ideal_line):
+def test_ideal_line_should_return_high_distance_on_ideal_but_short_line(
+    frechet, ideal_line
+):
     actual_line = LineSegment(
         [
             Point(-3, -0.15, 0.058),
@@ -90,13 +91,13 @@ def test_ideal_line_should_return_high_distance_on_ideal_but_short_line(ideal_li
             Point(3.7, -1.3, 0.16),
         ]
     )
-    evaluator = FrechetLineSegmentEvaluator()
-    result = evaluator.distance_from_ideal(ideal_line, actual_line)
-    print(result)
-    assert result == pytest.approx(24.0, rel=1)
+    result = frechet.distance_from_ideal(ideal_line, actual_line)
+    assert result == pytest.approx(24.0, rel=1e-1)
 
 
-def test_ideal_line_should_return_high_distance_on_ideal_but_long_line(ideal_line):
+def test_ideal_line_should_return_high_distance_on_ideal_but_long_line(
+    frechet, ideal_line
+):
     actual_line = LineSegment(
         [
             Point(-3, -0.15, 0.058),
@@ -104,10 +105,29 @@ def test_ideal_line_should_return_high_distance_on_ideal_but_long_line(ideal_lin
             Point(103.7, -1.3, 0.16),
         ]
     )
-    evaluator = FrechetLineSegmentEvaluator()
-    result = evaluator.distance_from_ideal(ideal_line, actual_line)
-    print(result)
-    assert result == pytest.approx(290.0, rel=1)
+    result = frechet.distance_from_ideal(ideal_line, actual_line)
+    assert result == pytest.approx(290.0, rel=1e-1)
+
+
+def test_ideal_line_should_return_good_distance_on_zigzag_line_within_road(
+    frechet, ideal_line
+):
+    actual_line = LineSegment(
+        [
+            Point(-3.4, -0.18, -1.1),
+            Point(7.4, -3, -1.1),
+            Point(-4.7, 8.6, -1.1),
+            Point(-2.9, -1, 0.13),
+            Point(1.6, 1.7, 0),
+            Point(4.3, -2.6, 0.14),
+            Point(5.7, 0.3, 0.067),
+            Point(5.5, 3.9, 0.16),
+            Point(1.4, 3.3, 0.005),
+            Point(-2.1, 5.2, 0.16),
+        ]
+    )
+    result = frechet.distance_from_ideal(ideal_line, actual_line)
+    assert result == pytest.approx(73.0, rel=1e-1)
 
 
 # TODO: test more cases
