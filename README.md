@@ -83,6 +83,10 @@ Taken from the [docs](https://www.open3d.org/docs/release/tutorial/visualization
   O            : Take a capture of current rendering settings.
 ```
 
+### Pulling down the actual data instead of the pointers
+```bash
+git lfs pull
+```
 
 ### Remove your poetry env manually
 ```bash

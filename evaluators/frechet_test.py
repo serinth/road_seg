@@ -128,6 +128,3 @@ def test_ideal_line_should_return_good_distance_on_zigzag_line_within_road(
     )
     result = frechet.distance_from_ideal(ideal_line, actual_line)
     assert result == pytest.approx(73.0, rel=1e-1)
-
-
-# TODO: test more cases
